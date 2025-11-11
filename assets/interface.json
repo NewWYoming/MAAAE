@@ -1,4 +1,7 @@
 {
+    "name": "MAAAE",
+    "url": "https://github.com/NewWYoming/MAAAE",
+    "custom_title": "白荆回廊 MAA 任务管理器",
     "controller": [
         {
             "name": "安卓端",
@@ -15,7 +18,7 @@
     ],
     "resource": [
         {
-            "name": "官服",
+            "name": "国服通用",
             "path": [
                 "{PROJECT_DIR}/resource"
             ]
