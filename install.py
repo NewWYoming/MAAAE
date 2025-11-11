@@ -61,6 +61,19 @@ def install_resource():
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
         interface = jsonc.load(f)
 
+    # 合并options文件夹中的选项
+    options_dir = working_dir / "assets" / "options"
+    if options_dir.exists():
+        interface["option"] = {}
+        for option_file in options_dir.glob("*.json"):
+            option_name = option_file.stem  # 获取文件名（不含扩展名）
+            try:
+                with open(option_file, "r", encoding="utf-8") as f:
+                    option_data = jsonc.load(f)
+                    interface["option"][option_name] = option_data
+            except Exception as e:
+                print(f"警告: 无法加载选项文件 {option_file}: {e}")
+
     interface["version"] = version
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:

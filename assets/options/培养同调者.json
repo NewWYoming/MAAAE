@@ -1,0 +1,818 @@
+{
+    "cases": [
+        {
+            "name": "老板",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "老板"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "Sweeper-EX",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "Sweeper-EX|Sweeper|sweeper"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "豹富",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "豹富|豹"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "水"
+                }
+            }
+        },
+        {
+            "name": "田偌",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "田偌|田"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "水"
+                }
+            }
+        },
+        {
+            "name": "艾摩诃",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "艾摩诃|艾摩"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "元桃桃",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "元桃桃"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "水"
+                }
+            }
+        },
+        {
+            "name": "霍冉",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "霍冉"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "炎"
+                }
+            }
+        },
+        {
+            "name": "狄砚",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "狄砚|狄"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "刘兄",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "刘兄"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "马尔斯",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "马尔斯"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "长谣",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "长谣|谣"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "水"
+                }
+            }
+        },
+        {
+            "name": "唐路遥",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "唐路遥"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "焰响",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "焰响"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "炎"
+                }
+            }
+        },
+        {
+            "name": "赫九逸",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "赫九逸"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "莉缇亚",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "莉缇亚"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "吉娜",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "吉娜"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "蚀"
+                }
+            }
+        },
+        {
+            "name": "岚岚",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "岚岚"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "风"
+                }
+            }
+        },
+        {
+            "name": "襄铃",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "襄铃|铃"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "炎"
+                }
+            }
+        },
+        {
+            "name": "罗咤",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "罗咤|罗"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "炎"
+                }
+            }
+        },
+        {
+            "name": "阳铃",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "阳铃"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "霜"
+                }
+            }
+        },
+        {
+            "name": "禺期",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "禺期|期"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "尚非乐",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "尚非乐"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "风"
+                }
+            }
+        },
+        {
+            "name": "修",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "修"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "凤无梦",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "凤无梦|无梦"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "蚀"
+                }
+            }
+        },
+        {
+            "name": "苏筱",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "苏筱|苏"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "芙蕖",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "芙"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "水"
+                }
+            }
+        },
+        {
+            "name": "司危",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "司危"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "白鸟梓",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "白鸟梓|白鸟"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "风"
+                }
+            }
+        },
+        {
+            "name": "无咎",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "无咎|无"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "炎"
+                }
+            }
+        },
+        {
+            "name": "瓦卡莎",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "瓦卡莎"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "风"
+                }
+            }
+        },
+        {
+            "name": "卡洛琳",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "卡洛琳"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "蚀"
+                }
+            }
+        },
+        {
+            "name": "阿棘",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "阿棘"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "蚀"
+                }
+            }
+        },
+        {
+            "name": "雪长夏",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "雪长夏"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "比戈尼娅",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "比戈尼娅|比戈"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "霜"
+                }
+            }
+        },
+        {
+            "name": "卯绒绒",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "卯绒绒|绒绒"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "水"
+                }
+            }
+        },
+        {
+            "name": "岑缨",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "岑缨|岑"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "伊琅相思",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "伊琅相思|相思"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "炎"
+                }
+            }
+        },
+        {
+            "name": "龙晴",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "龙晴"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "水"
+                }
+            }
+        },
+        {
+            "name": "瞳",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "瞳"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "昊苍",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "昊苍|苍"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "炎"
+                }
+            }
+        },
+        {
+            "name": "乐无异",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "乐无异"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "晴雪",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "晴雪"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "风"
+                }
+            }
+        },
+        {
+            "name": "米达斯",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "米达斯"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "云无月",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "云无月"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "蚀"
+                }
+            }
+        },
+        {
+            "name": "北洛",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "北洛"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "紫都",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "紫都"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "风"
+                }
+            }
+        },
+        {
+            "name": "崔远之",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "崔远之"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "莫红袖",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "莫红袖"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "炎"
+                }
+            }
+        },
+        {
+            "name": "红玉",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "红玉"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "风"
+                }
+            }
+        },
+        {
+            "name": "耶芙娜",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "耶芙娜"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "霜"
+                }
+            }
+        },
+        {
+            "name": "言雀",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "言雀"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "言御",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "言御"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "霜"
+                }
+            }
+        },
+        {
+            "name": "风晴雪",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "风晴雪"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "霜"
+                }
+            }
+        },
+        {
+            "name": "百里屠苏",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "百里屠苏"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "炎"
+                }
+            }
+        },
+        {
+            "name": "鸢",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "鸢"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "蚀"
+                }
+            }
+        },
+        {
+            "name": "尤尼",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "尤尼"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "水"
+                }
+            }
+        },
+        {
+            "name": "提提亚",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "提提亚"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "水"
+                }
+            }
+        },
+        {
+            "name": "景",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "景"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "缇诗",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "缇诗|诗"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "雷"
+                }
+            }
+        },
+        {
+            "name": "明月尘",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "明月尘"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "蚀"
+                }
+            }
+        },
+        {
+            "name": "林",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "林"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "炎"
+                }
+            }
+        },
+        {
+            "name": "珑",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "珑"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "蚀"
+                }
+            }
+        },
+        {
+            "name": "玄戈",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "玄戈"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                }
+            }
+        },
+        {
+            "name": "余音",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "余音"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "水"
+                }
+            }
+        },
+        {
+            "name": "十手卫",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "十手卫"
+                },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "风"
+                }
+            }
+        },
+        {
+             "name": "龙和",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "龙和"
+                    },
+                    "同调者培养_筛选同调者_选择属性": {
+                        "expected": "火"
+                    }
+                }
+        },
+        {
+            "name": "温留",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "温留"
+                    },
+                "同调者培养_筛选同调者_选择属性": {
+                    "expected": "物理"
+                    }
+                }
+        },
+        {
+             "name": "拉波",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "拉波"
+                    },
+                    "同调者培养_筛选同调者_选择属性": {
+                        "expected": "霜"
+                    }
+                }
+        },
+        {
+             "name": "司旸",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "司旸"
+                    },
+                    "同调者培养_筛选同调者_选择属性": {
+                        "expected": "雷"
+                    }
+                }
+        },
+        {
+             "name": "茜茜",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "茜茜"
+                    },
+                    "同调者培养_筛选同调者_选择属性": {
+                        "expected": "蚀"
+                    }
+                }
+        },
+        {
+             "name": "谛卡",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "谛卡"
+                    },
+                    "同调者培养_筛选同调者_选择属性": {
+                        "expected": "水"
+                    }
+                }
+        },
+        {
+             "name": "织雪",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "织雪"
+                    },
+                    "同调者培养_筛选同调者_选择属性": {
+                        "expected": "火"
+                    }
+                }
+        },
+        {
+             "name": "红珠小姐",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "红珠小姐"
+                    },
+                    "同调者培养_筛选同调者_选择属性": {
+                        "expected": "蚀"
+                    }
+                }
+        },
+        {
+             "name": "逸虚",
+            "pipeline_override": {
+                "同调者培养_选择同调者": {
+                    "expected": "逸虚"
+                    },
+                    "同调者培养_筛选同调者_选择属性": {
+                        "expected": "物理"
+                    }
+                }
+        },
+    ]
+}

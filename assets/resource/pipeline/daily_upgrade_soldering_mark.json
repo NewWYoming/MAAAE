@@ -70,22 +70,30 @@
         ],
         "action": "Click",
         "post_wait_freezes": 200,
-        "next": "日常_升级烙痕_选择烙痕"
+        "next": [
+            "日常_升级烙痕_选择烙痕",
+            "日常_升级烙痕_返回主界面"
+        ]
     },
     "日常_升级烙痕_选择烙痕": {
-        "action": "Click",
-        "target": [
-            687,
-            207,
-            56,
-            55
+        "recognition": "Custom",
+        "custom_recognition": "mylevelcheck",
+        "custom_recognition_param": {
+            "target_level": 60
+        },
+        "roi": [
+            100,
+            250,
+            900,
+            380
         ],
+        "action": "Click",
         "post_wait_freezes": 100,
         "next": "日常_升级烙痕_强化烙痕"
     },
     "日常_升级烙痕_强化烙痕": {
         "recognition": "OCR",
-        "expected": "强化",
+        "expected": "强化|強化|烙痕",
         "roi": [
             957,
             638,

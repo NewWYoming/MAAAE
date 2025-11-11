@@ -50,15 +50,13 @@
         ]
     },
     "周常_拟合回归_选择队伍": {
-        "recognition": "TemplateMatch",
-        "template": "队伍编辑/队伍编辑_选择队伍1__605_23_23_29__555_0_123_102.png",
-        "roi": [
-            585,
-            5,
-            235,
-            60
+        "recognition": "DirectHit",
+        "target": [
+            280,
+            80,
+            25,
+            25
         ],
-        "threshold": 0.9,
         "action": "Click",
         "next": "周常_拟合回归_作战开始"
     },
@@ -72,8 +70,36 @@
             125
         ],
         "action": "Click",
-        "next": "周常_拟合回归_开始战斗"
+        "next": [
+        "周常_拟合回归_开始战斗",
+        "周常_拟合回归_缺少支援"
+        ],
+        "interrupt": ["通用_点击确定按键"]
     },
+    "周常_拟合回归_缺少支援": {
+        "recognition": "OCR",
+        "expected": "选择支援同调者",
+        "roi": [
+            140,
+            200,
+            1000,
+            165
+        ],
+        "action": "Click",
+        "next": "周常_拟合回归_支援补充"
+    },
+    "周常_拟合回归_支援补充": {
+        "recognition": "OCR",
+        "expected": ["好友"],
+        "target": [340,10,79,48],
+        "target_offset": [0,200,0,0],
+        "action": "Click",
+        "next": [
+        "周常_拟合回归_作战开始"
+        ],
+        "interrupt": "通用_保存编队更改"
+    },
+    
     "周常_拟合回归_开始战斗": {
         "recognition": "OCR",
         "expected": "开始战斗",
@@ -83,7 +109,7 @@
             215,
             140
         ],
-        "pre_wait_freezes": 200,
+        "rate_limit": 3000,
         "action": "Click",
         "next": "周常_拟合回归_确认开始战斗",
         "interrupt": [

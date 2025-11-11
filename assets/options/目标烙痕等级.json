@@ -1,0 +1,54 @@
+{
+    "cases": [
+        {
+            "name": "20级",
+            "pipeline_override": {
+                "日常_升级烙痕_选择烙痕": {
+                    "custom_recognition_param": {
+                        "target_level": 20
+                    }
+                }
+            }
+        },
+        {
+            "name": "30级",
+            "pipeline_override": {
+                "日常_升级烙痕_选择烙痕": {
+                    "custom_recognition_param": {
+                        "target_level": 30
+                    }
+                }
+            }
+        },
+        {
+            "name": "40级",
+            "pipeline_override": {
+                "日常_升级烙痕_选择烙痕": {
+                    "custom_recognition_param": {
+                        "target_level": 40
+                    }
+                }
+            }
+        },
+        {
+            "name": "60级",
+            "pipeline_override": {
+                "日常_升级烙痕_选择烙痕": {
+                    "custom_recognition_param": {
+                        "target_level": 60
+                    }
+                }
+            }
+        },
+        {
+            "name": "90级",
+            "pipeline_override": {
+                "日常_升级烙痕_选择烙痕": {
+                    "custom_recognition_param": {
+                        "target_level": 90
+                    }
+                }
+            }
+        }
+    ]
+}

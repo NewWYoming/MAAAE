@@ -10,6 +10,27 @@
         ],
         "action": "Click"
     },
+    "通用_点击边缘返回": {
+        "recognition": "DirectHit",
+        "roi": [
+            4,
+            0,
+            143,
+            103
+        ],
+        "action": "Click"
+    },
+    "通用_保存编队更改":{
+        "recognition": "OCR",
+        "expected": ["保存更改"],
+        "roi": [
+            970,
+            640,
+            230,
+            65
+        ],
+        "action": "Click"
+    },
     "通用_点击屏幕继续": {
         "recognition": "OCR",
         "expected": "点击屏幕继续",
@@ -168,5 +189,17 @@
         ],
         "index": -1,
         "action": "Click"
+    },
+    "OCR": {
+        "recognition": "OCR",
+        "expected": [""],
+        "index": -1,
+        "roi": [
+            10,
+            10,
+            10,
+            10
+        ]
     }
+    
 }
