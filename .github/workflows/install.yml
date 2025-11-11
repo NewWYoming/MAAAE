@@ -102,6 +102,28 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFAAvalonia."
 
+      - name: Rename MFAAvalonia and change icon
+        if: matrix.os != 'android'
+        shell: bash
+        run: |
+          echo "Processing MFAAvalonia files..."
+          
+          # 查找并重命名 MFAAvalonia.exe 为 MAAAE
+          if [ -f "MFA/MFAAvalonia.exe" ]; then
+            mv "MFA/MFAAvalonia.exe" "MFA/MAAAE.exe"
+            echo "Renamed MFAAvalonia.exe to MAAAE.exe"
+          else
+            echo "MFAAvalonia.exe not found in MFA directory"
+          fi
+          
+          # 复制图标文件到 MFA 目录
+          if [ -f "assets/resource/image/logo.ico" ]; then
+            cp "assets/resource/image/logo.ico" "MFA/logo.ico"
+            echo "Copied logo.ico to MFA directory"
+          else
+            echo "Logo file not found at assets/resource/image/logo.ico"
+          fi
+
       - name: Install
         shell: bash
         run: |
