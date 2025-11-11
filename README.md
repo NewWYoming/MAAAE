@@ -305,6 +305,14 @@ Linux 用户可以使用 `cron` 来定时运行 `MaaPiCli`。相关方法请自�
   <img src="https://contrib.rocks/image?repo=moulai/MaaAshEchoes" />
 </a>
 
+以及本项目开发者：
+
+<a href="https://github.com/NewWYoming/MAAAE/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=NewWYoming/MAAAE" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
 ## Join us
 
 闲聊/反馈/交流/开发群 QQ 群：865686593
