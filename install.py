@@ -14,6 +14,28 @@ if script_dir not in sys.path:
 if os.path.exists("install/deps"):
     sys.path.insert(0, "install/deps")
 
+try:
+    import jsonc
+except ModuleNotFoundError as e:
+    # 如果在嵌入式环境中，尝试从本地依赖目录导入
+    try:
+        # 添加可能的依赖路径
+        deps_paths = [
+            "install/deps",
+            "install/python/Lib/site-packages",
+            "deps"
+        ]
+        for path in deps_paths:
+            if os.path.exists(path):
+                sys.path.insert(0, path)
+        import jsonc
+    except ImportError:
+        raise ImportError(
+            "Missing dependency 'json-with-comments' (imported as 'jsonc').\n"
+            f"Install it with:\n  {sys.executable} -m pip install json-with-comments\n"
+            "Or add it to your project's requirements."
+        ) from e
+
 from configure import configure_ocr_model
 
 

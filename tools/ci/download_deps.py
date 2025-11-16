@@ -174,6 +174,19 @@ def main():
     parser.add_argument("--deps-dir", default="deps", help="依赖下载目录 (默认: deps)")
 
     args = parser.parse_args()
+    # 安装依赖到指定目录
+    print("正在安装Python依赖...")
+    try:
+        subprocess.run([
+            sys.executable, "-m", "pip", "install",
+            "json-with-comments",
+            "--target", args.deps_dir,
+            "--no-deps"  # 不安装依赖的依赖，避免冲突
+        ], check=True)
+        print("Python依赖安装完成。")
+    except subprocess.CalledProcessError as e:
+        print(f"依赖安装失败: {e}")
+        sys.exit(1)
 
     try:
         # 自动检测平台
