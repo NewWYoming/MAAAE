@@ -60,14 +60,17 @@ jobs:
       is_release: ${{ steps.set_tag.outputs.is_release }}
       is_prerelease: ${{ steps.set_tag.outputs.is_prerelease }}
 
-  install:
+  windows:
     needs: meta
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [win, macos, linux, android]
-        arch: [aarch64, x86_64]
+        include:
+          - arch: x86_64
+            runner: windows-latest
+          - arch: aarch64
+            runner: windows-11-arm
       fail-fast: false
+    runs-on: ${{ matrix.runner }}
 
     steps:
       - uses: actions/checkout@v4
@@ -78,52 +81,34 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           repository: MaaXYZ/MaaFramework
-          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"
+          fileName: "MAA-win-${{ matrix.arch }}*"
           latest: true
           out-file-path: "deps"
           extract: true
 
       - name: Download MFAAvalonia
-        if: matrix.os != 'android'
         id: download_mfa
         uses: robinraju/release-downloader@v1
         with:
           repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-${{ (matrix.os == 'win' && 'win') || (matrix.os == 'macos' && 'osx') || (matrix.os == 'linux' && 'linux') }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
+          fileName: "MFAAvalonia-*-win-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}*"
           latest: true
           out-file-path: "MFA"
           extract: true
 
-      - name: Clean up MFAAvalonia archive
-        if: matrix.os != 'android'
+      - name: Clean up MFAAvalonia archive on Windows
         shell: bash
         run: |
           ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
           rm -f "${ARCHIVE_FILE_PATH}"
-          echo "Archive cleanup command executed for MFAAvalonia."
-
-      - name: Rename MFAAvalonia and change icon
-        if: matrix.os != 'android'
-        shell: bash
-        run: |
-          echo "Processing MFAAvalonia files..."
-          
-          # 查找并重命名 MFAAvalonia.exe 为 MAAAE
-          if [ -f "MFA/MFAAvalonia.exe" ]; then
-            mv "MFA/MFAAvalonia.exe" "MFA/MAAAE.exe"
-            echo "Renamed MFAAvalonia.exe to MAAAE.exe"
-          else
-            echo "MFAAvalonia.exe not found in MFA directory"
-          fi
+          echo "Archive cleanup command executed for MFAAvalonia on Windows."
 
       - name: Setup Embed Python on Windows
-        if: matrix.os == 'win'
         shell: bash
         run: |
           python tools/ci/setup_embed_python.py
-        
+          
       - name: Download Python dependencies
-        if: matrix.os == 'win'
         shell: bash
         run: |
           ./install/python/python.exe tools/ci/download_deps.py --deps-dir install/deps
@@ -131,34 +116,154 @@ jobs:
       - name: Install
         shell: bash
         run: |
-          if [[ "${{ matrix.os }}" == "win" ]]; then
-            # 在Windows上使用嵌入式Python
-            ./install/python/python.exe ./install.py ${{ needs.meta.outputs.tag }}
+          ./install/python/python.exe ./install.py ${{ needs.meta.outputs.tag }}
+          if [ -d "MFA" ]; then
+            echo "Copying MFA files to install directory..."
+            mkdir -p install
+            cp -rpvn MFA/. install/
           else
-            # 在其他平台上使用系统Python
-            python -m pip install -r ./requirements.txt
-            python ./install.py ${{ needs.meta.outputs.tag }}
+            echo "MFA directory not found, skipping copy."
           fi
+          cp "tools/DependencySetup_依赖库安装.bat" install/
 
-          if [[ "${{ matrix.os }}" != "android" ]]; then
-            if [ -d "MFA" ]; then
-              echo "Copying MFA files to install directory..."
-              mkdir -p install
-              rsync -av --ignore-existing MFA/ install/
-            else
-              echo "MFA directory not found, skipping copy."
-            fi
-            if [[ "${{ matrix.os }}" == "win" ]]; then
-              mkdir -p install
-              cp -v "tools/DependencySetup_依赖库安装.bat" install/
-            fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MAAAE-win-${{ matrix.arch }}
+          path: "install"
+
+  linux:
+    needs: meta
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [aarch64, x86_64]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Download MaaFramework for Linux
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: MaaXYZ/MaaFramework
+          fileName: "MAA-linux-${{ matrix.arch }}*"
+          latest: true
+          out-file-path: "deps"
+          extract: true
+
+      - name: Download MFAAvalonia for Linux
+        id: download_mfa
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: SweetSmellFox/MFAAvalonia
+          fileName: "MFAAvalonia-*-linux-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}*"
+          latest: true
+          out-file-path: "MFA"
+          extract: true
+
+      - name: Clean up MFAAvalonia archive on Linux
+        shell: bash
+        run: |
+          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
+          rm -f "${ARCHIVE_FILE_PATH}"
+          echo "Archive cleanup command executed for MFAAvalonia on Linux."
+
+      - name: Download Python dependencies
+        shell: bash
+        run: |
+          python3 tools/ci/download_deps.py --deps-dir install/deps
+
+      - name: Install on Linux
+        shell: bash
+        run: |
+          PYTHON_EXECUTABLE="python3"
+          echo "Using Python executable: $PYTHON_EXECUTABLE for Linux"
+          $PYTHON_EXECUTABLE ./install.py ${{ needs.meta.outputs.tag }}
+          if [ -d "MFA" ]; then
+            echo "Copying MFA files to install directory on Linux..."
+            mkdir -p install
+            rsync -av --ignore-existing MFA/ install/
           else
-            echo "Skipping copy MFA for Android."
+            echo "MFA directory not found on Linux, skipping copy."
           fi
 
       - uses: actions/upload-artifact@v4
         with:
-          name: MAAAE-${{ matrix.os }}-${{ matrix.arch }}
+          name: MAAAE-linux-${{ matrix.arch }}
+          path: "install"
+
+  macos:
+    needs: meta
+    strategy:
+      matrix:
+        include:
+          - arch: x86_64
+            runner: macos-13  # Intel-based macOS runner
+          - arch: aarch64
+            runner: macos-latest  # Apple Silicon macOS runner
+      fail-fast: false
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Download MaaFramework for macOS
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: MaaXYZ/MaaFramework
+          fileName: "MAA-macos-${{ matrix.arch }}*"
+          latest: true
+          out-file-path: "deps"
+          extract: true
+
+      - name: Download MFAAvalonia for macOS
+        id: download_mfa
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: SweetSmellFox/MFAAvalonia
+          fileName: "MFAAvalonia-*-osx-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}*"
+          latest: true
+          out-file-path: "MFA"
+          extract: true
+
+      - name: Clean up MFAAvalonia archive on macOS
+        shell: bash
+        run: |
+          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
+          rm -f "${ARCHIVE_FILE_PATH}"
+          echo "Archive cleanup command executed for MFAAvalonia on macOS."
+
+      - name: Setup Embed Python on macOS
+        shell: bash
+        run: |
+          python3 tools/ci/setup_embed_python.py
+
+      - name: Download Python dependencies
+        shell: bash
+        run: |
+          ./install/python/bin/python3 tools/ci/download_deps.py --deps-dir install/deps
+
+      - name: Install on macOS
+        shell: bash
+        run: |
+          PYTHON_EXECUTABLE="./install/python/bin/python3"
+          echo "Using Python executable: $PYTHON_EXECUTABLE for macOS"
+          $PYTHON_EXECUTABLE ./install.py ${{ needs.meta.outputs.tag }}
+
+          if [ -d "MFA" ]; then
+            echo "Copying MFA files to install directory on macOS..."
+            mkdir -p install
+            rsync -av --ignore-existing MFA/ install/ # Using rsync like on Linux
+          else
+            echo "MFA directory not found on macOS, skipping copy."
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MAAAE-macos-${{ matrix.arch }}
           path: "install"
 
   changelog:
@@ -184,7 +289,7 @@ jobs:
 
   release:
     if: ${{ needs.meta.outputs.is_release == 'true' }}
-    needs: [meta, install, changelog]
+    needs: [meta, windows, linux, macos, changelog]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
