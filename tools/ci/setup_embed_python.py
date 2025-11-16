@@ -175,7 +175,7 @@ def main():
 
         # 使用 python-build-standalone 以获取包含 venv 的完整版本
         pbs_arch = "x86_64" if win_arch_suffix == "amd64" else "aarch64"
-        file_name = f"cpython-{PYTHON_VERSION_TARGET}+{PYTHON_BUILD_STANDALONE_RELEASE_TAG}-{pbs_arch}-pc-windows-msvc-shared-install_only.zip"
+        file_name = f"cpython-{PYTHON_VERSION_TARGET}+{PYTHON_BUILD_STANDALONE_RELEASE_TAG}-{pbs_arch}-pc-windows-msvc-shared-pgo+lto.zip"
         download_url = f"https://github.com/indygreg/python-build-standalone/releases/download/{PYTHON_BUILD_STANDALONE_RELEASE_TAG}/{file_name}"
         
         temp_dir = os.path.join(os.path.dirname(DEST_DIR), "_temp_python_download")
