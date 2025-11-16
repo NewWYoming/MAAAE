@@ -3,7 +3,6 @@ from pathlib import Path
 import shutil
 import sys
 import os
-import json
 from pathlib import Path
 
 # 将脚本所在的目录添加到 Python 路径中，以确保可以找到 configure 模块
@@ -127,7 +126,7 @@ def install_agent():
     )
 
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
-        interface = json.load(f)
+        interface = jsonc.load(f)
 
     if sys.platform.startswith("win"):
         interface["agent"]["child_exec"] = r"{PROJECT_DIR}/python/python.exe"
@@ -139,7 +138,7 @@ def install_agent():
     interface["agent"]["child_args"] = ["-u", r"{PROJECT_DIR}/agent/main.py"]
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
-        json.dump(interface, f, ensure_ascii=False, indent=4)
+        jsonc.dump(interface, f, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
     install_deps()
