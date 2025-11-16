@@ -12,10 +12,10 @@ sys.stdout.reconfigure(encoding="utf-8")
 print(os.getcwd())
 # --- 配置 ---
 # 可以根据需要修改这些值
-PYTHON_VERSION_TARGET = "3.12.10"  # 目标 Python 版本
+PYTHON_VERSION_TARGET = "3.12.12"  # 目标 Python 版本
 # python-build-standalone 的发布标签，需要与 PYTHON_VERSION_TARGET 兼容
 # 前往 https://github.com/indygreg/python-build-standalone/releases 查看最新标签和可用版本
-PYTHON_BUILD_STANDALONE_RELEASE_TAG = "20250409"
+PYTHON_BUILD_STANDALONE_RELEASE_TAG = "20251031"
 
 DEST_DIR = os.path.join("install", "python")  # Python 安装的目标目录
 
@@ -175,18 +175,18 @@ def main():
 
         # 使用 python-build-standalone 以获取包含 venv 的完整版本
         pbs_arch = "x86_64" if win_arch_suffix == "amd64" else "aarch64"
-        file_name = f"cpython-{PYTHON_VERSION_TARGET}+{PYTHON_BUILD_STANDALONE_RELEASE_TAG}-{pbs_arch}-pc-windows-msvc-shared-pgo+lto.zip"
+        file_name = f"cpython-{PYTHON_VERSION_TARGET}+{PYTHON_BUILD_STANDALONE_RELEASE_TAG}-{pbs_arch}-pc-windows-msvc-install_only.tar.gz"
         download_url = f"https://github.com/indygreg/python-build-standalone/releases/download/{PYTHON_BUILD_STANDALONE_RELEASE_TAG}/{file_name}"
         
         temp_dir = os.path.join(os.path.dirname(DEST_DIR), "_temp_python_download")
         os.makedirs(temp_dir, exist_ok=True)
-        zip_filepath = os.path.join(temp_dir, file_name)
+        tar_filepath = os.path.join(temp_dir, file_name)
 
         try:
-            download_file(download_url, zip_filepath)
+            download_file(download_url, tar_filepath)
             
             # 解压到临时目录，然后移动内容
-            extract_zip(zip_filepath, temp_dir)
+            extract_tar(tar_filepath, temp_dir)
             extracted_python_root = os.path.join(temp_dir, "python")
             if os.path.isdir(extracted_python_root):
                 shutil.copytree(extracted_python_root, DEST_DIR, dirs_exist_ok=True)
