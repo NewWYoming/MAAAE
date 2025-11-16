@@ -3,6 +3,12 @@ from pathlib import Path
 import shutil
 import sys
 import os
+from pathlib import Path
+
+# 将脚本所在的目录添加到 Python 路径中，以确保可以找到 configure 模块
+script_dir = os.path.dirname(os.path.abspath(__file__))
+if script_dir not in sys.path:
+    sys.path.insert(0, script_dir)
 
 # 添加嵌入式Python的依赖路径
 if os.path.exists("install/deps"):
