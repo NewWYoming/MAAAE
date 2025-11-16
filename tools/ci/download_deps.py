@@ -3,6 +3,9 @@ import sys
 import argparse
 import subprocess
 
+# Set encoding to utf-8
+sys.stdout.reconfigure(encoding='utf-8')
+
 def main():
     parser = argparse.ArgumentParser(description='下载Python依赖')
     parser.add_argument('--deps-dir', required=True, help='依赖安装目录')
