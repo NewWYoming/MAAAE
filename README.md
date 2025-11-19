@@ -120,6 +120,8 @@ chmod a+x MaaPiCli
 
 ~~用 Linux 的大佬应该不需要我教~~
 
+Linux 用户请根据您的设备处理器类型选择合适的版本并且根据 requirements.txt 安装 Python 和必要的依赖。
+
 ## 使用说明
 
 ### 使用前说明
@@ -151,6 +153,7 @@ chmod a+x MaaPiCli
 1. **任务执行顺序**：
    - 请合理调整任务顺序，例如，建议将“领取奖励”相关的任务放在流程的最后。
    - 如果不确定任务执行顺序，请保持默认的执行顺序，并勾选您需要的任务。
+   - 如希望使用不同配置多次执行同一任务，请在任务栏右上角通过“ + ”添加同名任务修改配置。
 
 2. **茶憩任务特别说明（重要）**：
 
@@ -187,9 +190,11 @@ chmod a+x MaaPiCli
 
 **[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)** 支持自动更新及手动更新资源，使用【设置】→【软件更新】→检查资源/资源更新/自动更新资源即可。注意，这里“软件更新”指的是 MFAAvalonia 这个 GUI 的更新，不是 MAAAE 的更新。“资源更新”才是 MAAAE 的更新。
 
-若使用 MFAAvalonia 更新资源失败，可以尝试使用 `updater.exe` 进行更新。
+若右下角弹窗报错，请依次检查尝试以下内容：
 
-更新后可能会出现配置文件不兼容的问题，导致程序无法正常运行。此时请删除 `config` 目录下的 `config.json` 文件，重新打开程序即可。
+1. 请将更新源设置为 github 而非 mirror。
+2. 检查网络连接是否正常，是否可以访问 GitHub。
+3. 尝试使用 github 的 token 进行更新，具体方法请参考 token 栏的链接说明。
 
 #### macOS/Linux 用户
 
@@ -238,7 +243,7 @@ Linux 用户可以使用 `cron` 来定时运行 `MaaPiCli`。相关方法请自�
 
 请附上以下信息提交 [Issue](https://github.com/NewWYoming/MAAAE/issues)，或加 QQ 群 865686593 提问：  
 
-- **日志文件**：位于 `debug/maa.log`。  
+- **日志文件**：位于 `debug/maa.log`，也可以使用 GUI 设置中的“导出日志”功能获取。
 - **截图**：请包含任务出错时的界面截图和问题描述。
 
 ## 已知问题
