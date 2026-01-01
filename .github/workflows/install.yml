@@ -62,12 +62,35 @@ jobs:
 
   install:
     needs: meta
-    runs-on: ${{ (matrix.os == 'win' && (matrix.arch == 'x86_64' && 'windows-latest' || 'windows-11-arm')) || (matrix.os == 'macos' && (matrix.arch == 'x86_64' && 'macos-13' || 'macos-latest')) || 'ubuntu-latest' }}
     strategy:
       matrix:
-        os: [win, macos, linux, android]
-        arch: [aarch64, x86_64]
+        include:
+          - os: win
+            arch: x86_64
+            runner: windows-latest
+          - os: win
+            arch: aarch64
+            runner: windows-latest
+          - os: macos
+            arch: x86_64
+            runner: macos-15-intel # Intel 镜像，若彻底停用可尝试 macos-14 或私有镜像
+          - os: macos
+            arch: aarch64
+            runner: macos-latest # Apple Silicon (M1/M2)
+          - os: linux
+            arch: x86_64
+            runner: ubuntu-latest
+          - os: linux
+            arch: aarch64
+            runner: ubuntu-latest
+          - os: android
+            arch: x86_64
+            runner: ubuntu-latest
+          - os: android
+            arch: aarch64
+            runner: ubuntu-latest
       fail-fast: false
+    runs-on: ${{ matrix.runner }}
 
     steps:
       - uses: actions/checkout@v4
@@ -122,40 +145,51 @@ jobs:
             python3 tools/ci/setup_embed_python.py
           fi
 
-      - name: Install
+      - name: Install (Windows)
+        if: matrix.os == 'win'
         shell: bash
         run: |
-          # 确定 Python 路径
-          if [[ "${{ matrix.os }}" == "win" ]]; then
-            PYTHON_EXE="./install/python/python.exe"
-            # 下载 Python 依赖 (Win)
-            $PYTHON_EXE tools/ci/download_deps.py --deps-dir install/deps
-          elif [[ "${{ matrix.os }}" == "macos" ]]; then
-            PYTHON_EXE="./install/python/bin/python3"
-            chmod +x $PYTHON_EXE || true
-            # 下载 Python 依赖 (Mac)
-            $PYTHON_EXE tools/ci/download_deps.py --deps-dir install/deps
-          else
-            PYTHON_EXE="python3"
-            # 下载 Python 依赖 (Linux/Android)
-            $PYTHON_EXE tools/ci/download_deps.py --deps-dir install/deps
+          PYTHON_EXE="./install/python/python.exe"
+          $PYTHON_EXE tools/ci/download_deps.py --deps-dir install/deps
+          
+          # 运行更新后的 install.py (支持 3 个参数)
+          $PYTHON_EXE ./install.py ${{ needs.meta.outputs.tag }} win ${{ matrix.arch }}
+          
+          if [ -d "MFA" ]; then
+            mkdir -p install
+            cp -rpvn MFA/. install/
+          fi
+          cp "tools/DependencySetup_依赖库安装.bat" install/ || true
+
+      - name: Install (MacOS)
+        if: matrix.os == 'macos'
+        shell: bash
+        run: |
+          PYTHON_EXE="./install/python/bin/python3"
+          chmod +x $PYTHON_EXE || true
+          $PYTHON_EXE tools/ci/download_deps.py --deps-dir install/deps
+          
+          # 运行更新后的 install.py (支持 3 个参数)
+          $PYTHON_EXE ./install.py ${{ needs.meta.outputs.tag }} macos ${{ matrix.arch }}
+          
+          if [ -d "MFA" ]; then
+            mkdir -p install
+            rsync -av --ignore-existing MFA/ install/
           fi
 
+      - name: Install (Linux/Android)
+        if: matrix.os == 'linux' || matrix.os == 'android'
+        shell: bash
+        run: |
+          PYTHON_EXE="python3"
+          $PYTHON_EXE tools/ci/download_deps.py --deps-dir install/deps
+          
           # 运行更新后的 install.py (支持 3 个参数)
           $PYTHON_EXE ./install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
-
-          # 拷贝 GUI 文件
-          if [[ "${{ matrix.os }}" != "android" ]]; then
-            if [ -d "MFA" ]; then
-              echo "Copying MFA files to install directory..."
-              mkdir -p install
-              rsync -av --ignore-existing MFA/ install/
-            fi
-          fi
-
-          # Win 特有：拷贝依赖安装脚本
-          if [[ "${{ matrix.os }}" == "win" ]]; then
-            cp "tools/DependencySetup_依赖库安装.bat" install/
+          
+          if [[ "${{ matrix.os }}" != "android" ]] && [ -d "MFA" ]; then
+            mkdir -p install
+            rsync -av --ignore-existing MFA/ install/
           fi
 
       - uses: actions/upload-artifact@v4
@@ -216,12 +250,3 @@ jobs:
           body: ${{ needs.changelog.outputs.release_body }}
           draft: false
           prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}
-
-      - name: Trigger MirrorChyanUploading
-        if: false
-        shell: bash
-        run: |
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release.yml -f tag=${{ needs.meta.outputs.tag }}
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
