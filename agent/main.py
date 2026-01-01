@@ -367,6 +367,9 @@ def agent(is_dev_mode=False):
 
         from maa.agent.agent_server import AgentServer
         from maa.toolkit import Toolkit
+        
+        # 导入自定义识别/动作模块以注册
+        import custom
 
         Toolkit.init_option("./")
 

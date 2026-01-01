@@ -1,13 +1,11 @@
 import math
-import logging
 import json
 import re  # 导入正则表达式模块
 from maa.agent.agent_server import AgentServer
 from maa.custom_recognition import CustomRecognition
 from maa.context import Context
 
-# 为模块设置日志记录器
-logger = logging.getLogger(__name__)
+from utils import logger
 
 @AgentServer.custom_recognition("mylevelcheck")
 class MyLevelCheck(CustomRecognition):
