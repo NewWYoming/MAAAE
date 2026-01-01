@@ -42,6 +42,8 @@ from configure import configure_ocr_model
 working_dir = Path(__file__).parent
 install_path = working_dir / Path("install")
 version = len(sys.argv) > 1 and sys.argv[1] or "v0.0.1"
+target_os = len(sys.argv) > 2 and sys.argv[2] or sys.platform
+target_arch = len(sys.argv) > 3 and sys.argv[3] or "x86_64"
 
 
 def install_deps():
@@ -128,11 +130,11 @@ def install_agent():
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
         interface = jsonc.load(f)
 
-    if sys.platform.startswith("win"):
+    if any(target_os.startswith(p) for p in ["win", "windows"]):
         interface["agent"]["child_exec"] = r"{PROJECT_DIR}/python/python.exe"
-    elif sys.platform.startswith("darwin"):
+    elif any(target_os.startswith(p) for p in ["macos", "darwin", "osx"]):
         interface["agent"]["child_exec"] = r"{PROJECT_DIR}/python/bin/python3"
-    elif sys.platform.startswith("linux"):
+    else:
         interface["agent"]["child_exec"] = r"python3"
 
     interface["agent"]["child_args"] = ["-u", r"{PROJECT_DIR}/agent/main.py"]

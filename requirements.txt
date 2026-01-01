@@ -1,4 +1,4 @@
 json-with-comments
-maafw
+maafw==5.3.0
 pytz
 loguru

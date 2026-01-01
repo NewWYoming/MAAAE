@@ -450,3 +450,6 @@ tools/ImageCropper/**/*.png
 
 config
 debug
+
+# backup files
+*.bak
