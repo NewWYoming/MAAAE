@@ -65,19 +65,24 @@ class MyLevelCheck(CustomRecognition):
             logger.error(f"调用 OCR 识别时发生异常: {e}")
             return CustomRecognition.AnalyzeResult(box=None, detail=f"OCR execution error: {e}")
 
-        if not ocr_results or not ocr_results.filterd_results: 
+        if not ocr_results or not ocr_results.filtered_results: 
             logger.warning(f"在区域 {roi_list} 内没有识别到任何文字。")
             return CustomRecognition.AnalyzeResult(box=None, detail="No text found in ROI")
 
         # --- 步骤 4: 筛选并找到最佳目标 ---
         valid_candidates = []
-        for reco_detail in ocr_results.filterd_results: 
+        for reco_detail in ocr_results.filtered_results: 
             try:
                 # 使用正则表达式提取所有数字，处理像 '>>>50' 这样的字符串
                 num_list = re.findall(r'\d+', reco_detail.text)
+                
+                # 删除00和0级的数据（必为误识别）
+                if "00" in num_list or "0" in num_list:
+                    num_list = [num for num in num_list if num != "00" and num != "0"]
+                    
                 if not num_list:
                     continue  # 如果没有找到数字，则跳过
-
+                
                 # 将找到的数字部分拼接起来并转换为整数
                 level = int("".join(num_list))
                 
