@@ -15,7 +15,7 @@
         {
             "name": "关卡名称",
             "label": "$关卡名称",
-            "description": "关卡名称（如：L-1, M-1, R-1 等，特殊关卡请输入显示名称如'基础订单'）",
+            "description": "关卡名称（如：L-1, M-1, R-1 等，部分关卡请输入显示名称如'基础订单'）",
             "default": "L-1",
             "pipeline_type": "string",
             "verify": "^([LMRKE]-\\d+|基础订单|限时隔爆)$",

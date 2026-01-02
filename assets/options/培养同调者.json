@@ -13,11 +13,11 @@
         {
             "name": "同调者属性",
             "label": "$同调者属性",
-            "description": "同调者属性（物理/水/火/雷/霜/风/蚀）",
+            "description": "同调者属性（物理/水/炎/雷/霜/风/蚀）",
             "default": "物理",
             "pipeline_type": "string",
-            "verify": "^(物理|水|火|雷|霜|风|蚀)$",
-            "pattern_msg": "属性必须是 物理/水/火/雷/霜/风/蚀 之一"
+            "verify": "^(物理|水|炎|雷|霜|风|蚀)$",
+            "pattern_msg": "属性必须是 物理/水/炎/雷/霜/风/蚀 之一"
         }
     ],
     "pipeline_override": {
