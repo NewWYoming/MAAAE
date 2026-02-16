@@ -124,6 +124,37 @@ jobs:
           # 移除内置运行时
           rm -rf MFA/runtimes || true
 
+      - name: Convert PNG to ICO
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          choco install imagemagick -y
+          magick convert assets/resource/image/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 maaae.ico
+
+      - name: Convert PNG to ICO (Linux)
+        if: matrix.os == 'linux'
+        shell: bash
+        run: |
+          sudo apt-get update && sudo apt-get install -y imagemagick
+          convert assets/resource/image/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 maaae.ico
+
+      - name: Convert PNG to ICO (macOS)
+        if: matrix.os == 'macos'
+        shell: bash
+        run: |
+          brew install imagemagick
+          magick convert assets/resource/image/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 maaae.ico
+
+      - name: Modify MAAAE exe icon
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+          if [ -f "MFA/MAAAE.exe" ]; then
+            ./rcedit.exe "MFA/MAAAE.exe" --set-icon "maaae.ico"
+            echo "MAAAE icon modified successfully"
+          fi
+
       - name: Setup Embed Python (Win/Mac)
         if: matrix.os == 'win' || matrix.os == 'macos'
         shell: bash
@@ -179,6 +210,25 @@ jobs:
           if [[ "${{ matrix.os }}" != "android" ]] && [ -d "MFA" ]; then
             mkdir -p install
             rsync -av --ignore-existing MFA/ install/
+          fi
+
+      - name: Copy custom icons
+        if: matrix.os != 'android'
+        shell: bash
+        run: |
+          # 删除 MFAA 自带的 Assets 文件夹
+          if [ -d "install/Assets" ]; then
+            rm -rf install/Assets
+            echo "Removed original Assets folder"
+          fi
+
+          # 优先使用生成的 ico，否则用仓库自带的
+          if [ -f "maaae.ico" ]; then
+            cp maaae.ico install/logo.ico
+            echo "Copied generated icon to install/logo.ico"
+          elif [ -f "assets/resource/image/logo.ico" ]; then
+            cp assets/resource/image/logo.ico install/logo.ico
+            echo "Copied existing icon to install/logo.ico"
           fi
 
       - uses: actions/upload-artifact@v4
