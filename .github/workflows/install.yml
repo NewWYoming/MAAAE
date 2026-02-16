@@ -126,10 +126,13 @@ jobs:
 
       - name: Convert PNG to ICO
         if: matrix.os == 'win' && matrix.arch == 'x86_64'
-        shell: bash
+        shell: pwsh
         run: |
           choco install imagemagick -y
+          # 刷新环境变量使 magick 可用
+          $env:Path = [System.Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path', 'User')
           magick convert assets/resource/image/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 maaae.ico
+          if (Test-Path maaae.ico) { Write-Host "ICO created successfully" } else { Write-Host "ICO creation failed" }
 
       - name: Convert PNG to ICO (Linux)
         if: matrix.os == 'linux'
@@ -147,13 +150,19 @@ jobs:
 
       - name: Modify MAAAE exe icon
         if: matrix.os == 'win' && matrix.arch == 'x86_64'
-        shell: bash
+        shell: pwsh
         run: |
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
-          if [ -f "MFA/MAAAE.exe" ]; then
-            ./rcedit.exe "MFA/MAAAE.exe" --set-icon "maaae.ico"
-            echo "MAAAE icon modified successfully"
-          fi
+
+          # 优先用生成的 ico，否则用仓库自带的
+          $icon = if (Test-Path maaae.ico) { 'maaae.ico' } elseif (Test-Path 'assets/resource/image/logo.ico') { 'assets/resource/image/logo.ico' } else { $null }
+
+          if ($icon -and (Test-Path 'MFA/MAAAE.exe')) {
+            ./rcedit.exe "MFA/MAAAE.exe" --set-icon $icon
+            Write-Host "MAAAE icon modified successfully with $icon"
+          } else {
+            Write-Host "WARNING: icon($icon) or MFA/MAAAE.exe not found, skipping"
+          }
 
       - name: Setup Embed Python (Win/Mac)
         if: matrix.os == 'win' || matrix.os == 'macos'
