@@ -20,8 +20,8 @@ on:
   workflow_dispatch:
 
 env:
-  MAA_FRAMEWORK_VERSION: "v5.3.0"
-  MFA_AVALONIA_VERSION: "v2.2.7"
+  MAA_FRAMEWORK_VERSION: "v5.6.0"
+  MFA_AVALONIA_VERSION: "v2.7.2"
 
 jobs:
   meta:
